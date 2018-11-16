@@ -1,0 +1,3 @@
+arm-none-eabi-gcc -c src/main.c -o build/maain -mcpu=cortex-m3 -mthumb -nostdlib -T linker-script/stm32f103c8t6.ld
+
+arm-none-eabi-objdump -x build/maain > l1
