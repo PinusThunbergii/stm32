@@ -2,9 +2,11 @@ volatile int i [32];
 
 int main()
 {
-    while(1)
+    int j = 543;///
+    char * lol = "LOL";
+    while(1) 
     {
-    i[0] = 1;
+        i[0] = 1;
     }
     return 0;
 }
