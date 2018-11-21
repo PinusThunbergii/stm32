@@ -1,3 +1,5 @@
+ENTRY(Reset_IRQHandler)
+stack_pointer = 0x20000400; /*1k*/
 MEMORY
 {
     rom( rx ) : ORIGIN = 0x08000000 , LENGTH = 128K

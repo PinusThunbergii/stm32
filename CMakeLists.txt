@@ -15,7 +15,8 @@ set(LINKER_SCRIPT "linker-script/stm32f103c8t6.ld")
 set(CMAKE_C_FLAGS "-mcpu=cortex-m3 -mthumb -nostdlib -o0 -g ")
 set(CMAKE_EXE_LINKER_FLAGS "-T ${PROJECT_SOURCE_DIR}/${LINKER_SCRIPT}")
 
-add_executable(${PROJECT_NAME} src/main.c)
+add_executable(${PROJECT_NAME} src/main.c src/vectors.c)
+
 #Устанавливаем зависимость для ребилда при изменении скрипта линкера
 set_target_properties(${PROJECT_NAME}  PROPERTIES LINK_DEPENDS ${CMAKE_SOURCE_DIR}/${LINKER_SCRIPT})
 
