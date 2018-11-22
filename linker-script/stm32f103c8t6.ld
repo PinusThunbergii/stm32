@@ -1,5 +1,6 @@
-ENTRY(Reset_IRQHandler)
-stack_pointer = 0x20000400; /*1k*/
+/*ENTRY(Reset_IRQHandler)*/
+_stack_size = 1K;
+_stack_pointer = 0x20000000 + _stack_size; /*1k*/
 MEMORY
 {
     rom( rx ) : ORIGIN = 0x08000000 , LENGTH = 128K
@@ -11,9 +12,12 @@ SECTIONS
     .vectors : {
         *(.vectors*)
     } > rom
+    . += 64;
     . = ALIGN(4);
     .text : {
+        _text_begin = .;
         *(.text*)
+        _text_end = .;
     } > rom
     . = ALIGN(4);
     .bss : {

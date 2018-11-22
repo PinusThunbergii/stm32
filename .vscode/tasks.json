@@ -4,14 +4,28 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "echo",
+            "label": "cmake build",
             "type": "shell",
             "command": "clear; cmake --build build/",
-            "group": 
-            {
+            "group": {
                 "isDefault": true,
-                "kind": "build",
+                "kind": "build"
             },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "cmake rebuild",
+            "type": "shell",
+            "command": "cd build/; cmake ../",
+            "group": {
+                "isDefault": true,
+                "kind": "build"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
         }
     ]
 }

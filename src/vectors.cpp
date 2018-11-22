@@ -1,6 +1,10 @@
+#include <cstdio>
 #include <stdint.h>
 
-extern uint32_t stack_pointer; 
+#ifdef __cplusplus
+extern "C" {
+#endif    
+extern size_t * _stack_pointer; 
 
 void DefaultHandler(void) __attribute__((weak));
 void DefaultHandler(void)
@@ -10,6 +14,8 @@ void DefaultHandler(void)
         //simple hook
     }
 }
+ 
+
 
 void Reset_IRQHandler(void)        __attribute__((weak, alias("DefaultHandler")));
 void NMI_IRQHandler(void)          __attribute__((weak, alias("DefaultHandler")));
@@ -22,23 +28,26 @@ void DebugMonitor_IRQHandler(void) __attribute__((weak, alias("DefaultHandler"))
 void PendSV_IRQHandler(void)       __attribute__((weak, alias("DefaultHandler")));
 void SysTick_IRQHandler(void)      __attribute__((weak, alias("DefaultHandler")));
 
- __attribute__ ((section(".vectors"))) uint32_t  vectors[] =
+ __attribute__ ((section(".vectors"))) size_t * vectors[] =
 {
-    0, //FIX stack pointer
-    &(Reset_IRQHandler),
-    &(NMI_IRQHandler),
-    &(HardFault_IRQHandler),
-    &(MemManage_IRQHandler),
-    &(BusFault_IRQHandler),
-    &(UsageFault_IRQHandler),
+    (size_t*)&_stack_pointer, //FIX stack pointer
+    (size_t*)&(Reset_IRQHandler),
+    (size_t*)&(NMI_IRQHandler),
+    (size_t*)&(HardFault_IRQHandler),
+    (size_t*)&(MemManage_IRQHandler),
+    (size_t*)&(BusFault_IRQHandler),
+    (size_t*)&(UsageFault_IRQHandler),
     0,
     0,
     0,
     0,
     0,
-    &(SVCall_IRQHandler),
-    &(DebugMonitor_IRQHandler),
-    &(PendSV_IRQHandler),
-    &(SysTick_IRQHandler)
+    (size_t*)&(SVCall_IRQHandler),
+    (size_t*)&(DebugMonitor_IRQHandler),
+    (size_t*)&(PendSV_IRQHandler),
+    (size_t*)&(SysTick_IRQHandler)
 };
 
+#ifdef __cplusplus
+}
+#endif  
