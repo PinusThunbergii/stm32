@@ -1,4 +1,4 @@
-/*ENTRY(Reset_IRQHandler)*/
+ENTRY(Reset_IRQHandler)
 _stack_size = 1K;
 _stack_pointer = 0x20000000 + _stack_size; /*1k*/
 MEMORY
@@ -6,13 +6,13 @@ MEMORY
     rom( rx ) : ORIGIN = 0x08000000 , LENGTH = 128K
     ram( rwx ) : ORIGIN = 0x20000000 , LENGTH = 20K
 }
-/*lddfssssf*/
+
 SECTIONS
 {
     .vectors : {
         *(.vectors*)
     } > rom
-    . += 64;
+
     . = ALIGN(4);
     .text : {
         _text_begin = .;
