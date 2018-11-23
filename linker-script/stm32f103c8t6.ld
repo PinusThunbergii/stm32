@@ -10,25 +10,25 @@ MEMORY
 SECTIONS
 {
     .vectors : {
-        *(.vectors*)
+        *(.vectors)
     } > rom
     . = ALIGN(4);
     .text : {
         _text_begin = .;
-        *(.text*)
+        *(.text)
         _text_end = .;
     } > rom
-    . = ALIGN(4);
+    . = ALIGN(4); 
     .bss : {
-        *(.bss*)
+        *(.bss)
     } > ram 
     . = ALIGN(4);
     .rodata : {
-        *(.rodata*)
+        *(.rodata)
     } > rom
     . = ALIGN(4);
     .data : {
-        *(.data*)
+        *(.data)
     } > ram AT > rom
     . = ALIGN(4);
 } 
