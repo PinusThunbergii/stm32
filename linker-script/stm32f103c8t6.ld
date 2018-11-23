@@ -12,7 +12,6 @@ SECTIONS
     .vectors : {
         *(.vectors*)
     } > rom
-
     . = ALIGN(4);
     .text : {
         _text_begin = .;

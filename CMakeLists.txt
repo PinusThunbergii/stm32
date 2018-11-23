@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 project(barebone C CXX)
 
+set(CMAKE_VERBOSE_MAKEFILE on)
+
 set(TOOLCHAIN_PREFIX arm-none-eabi-)
 
 set(CMAKE_C_COMPILER ${TOOLCHAIN_PREFIX}gcc)
@@ -18,10 +20,15 @@ set(CMAKE_EXE_LINKER_FLAGS "-T ${PROJECT_SOURCE_DIR}/${LINKER_SCRIPT}")
 set(
     MYSOURCES 
     src/main.cpp
-    src/vectors.cpp
+    #src/vectors.cpp
 )
-add_executable(${PROJECT_NAME} ${MYSOURCES})
 
+add_library(vectors src/vectors.cpp)
+add_library(startup src/startup.cpp)
+target_include_directories(startup PUBLIC third-party/CMSIS/CM3/DeviceSupport/ST/STM32F10x/ third-party/CMSIS/CM3/CoreSupport/) 
+
+add_executable(${PROJECT_NAME} ${MYSOURCES})
+target_link_libraries(${PROJECT_NAME} vectors startup)
 #Устанавливаем зависимость для ребилда при изменении скрипта линкера
 set_target_properties(${PROJECT_NAME}  PROPERTIES LINK_DEPENDS ${CMAKE_SOURCE_DIR}/${LINKER_SCRIPT})
 
