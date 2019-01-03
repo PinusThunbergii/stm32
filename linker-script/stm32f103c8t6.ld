@@ -9,45 +9,45 @@ MEMORY
 
 SECTIONS
 {
-    .vectors : {
-        . = ALIGN(4);
-        *(.vectors)
-        . = ALIGN(4);
+    .vectors : ALIGN(4)
+    {
+        * (.vectors);
     } > rom
 
-    
-    .text : {
-        . = ALIGN(4);
-        *(.text)
-        . = ALIGN(4);
+    .text : ALIGN(4)
+    {
+        * (.text);
     } > rom
 
-    .rodata : {
-        . = ALIGN(4);
-        *(.rodata)
-        . = ALIGN(4);
+    .rodata : ALIGN(4)
+    {
+        * (.rodata);
     } > rom
 
-    .stack ORIGIN(ram) : {
+    .stack ORIGIN(ram) : ALIGN(4)
+    {
         . += _stack_size;
-        . = ALIGN(4);
     } > ram
 
-    .bss : {
-        . = ALIGN(4);
-        _bss_start = .;
-        *(.bss)
-        . = ALIGN(4);
-        _bss_end = .;
+    .bss : ALIGN(4)
+    {
+        * (.bss);
     } > ram 
     
-    .data : {
-        . = ALIGN(4);
-        _data_start = .;
-        *(.data)
-        . = ALIGN(4);
-        _data_end = .;
-
+    .data : ALIGN(4)
+    {
+        * (.data);
     } > ram AT > rom
-   _data_l = LOADADDR(.data);
+
+    _bss_start = ADDR(.bss);
+    _bss_end = ADDR(.bss) + SIZEOF(.bss);
+    _bss_size = SIZEOF(.bss);
+
+    _data_vma_start = ADDR(.data);
+    _data_vma_end = ADDR(.data) + SIZEOF(.data);
+    _data_vma_size = SIZEOF(.data);
+
+    _data_lma_start = LOADADDR(.data);
+    _data_lma_end = LOADADDR(.data) + SIZEOF(.data);
+    _data_lma_size = SIZEOF(.data);
 } 

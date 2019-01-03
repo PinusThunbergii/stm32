@@ -4,7 +4,7 @@ int t = 0x30313233;
 int main()
 {
 ///
-    char * lol = "LOL2";
+ //   char * lol = "LOL2";
     while(1) 
     {
         i[0] = 1;

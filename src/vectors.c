@@ -1,16 +1,17 @@
-#include <cstdio>
+//#include <cstdio>
 #include <stdint.h>
 
 #define vector_weak __attribute__((weak))
 #define vector_default_handler __attribute__((alias("DefaultHandler")))
+typedef void (* const FunctionPointer)(void);
 
-#ifdef __cplusplus
+#ifdef __cplusplus2
 extern "C"
 {
 #endif
-    extern size_t *_stack_pointer;
+    extern uint32_t *_stack_pointer;
 
-    void DefaultHandler(void) __attribute__((weak));
+
     void DefaultHandler(void)
     {
         while (1)
@@ -18,7 +19,7 @@ extern "C"
             //simple hook
         }
     }
-
+    __attribute__ ((noreturn))
     vector_weak vector_default_handler void Reset_IRQHandler(void);
     vector_weak vector_default_handler void NMI_IRQHandler(void);
     vector_weak vector_default_handler void HardFault_IRQHandler(void);
@@ -74,70 +75,70 @@ extern "C"
     vector_weak vector_default_handler void RTCAlarm_IRQHandler(void);
     vector_weak vector_default_handler void USBWakeUp_IRQHandler(void);
 
-    __attribute__((section(".vectors"))) size_t *vectors[] =
+    __attribute__((section(".vectors"))) FunctionPointer vectors[] =
         {
-            (size_t *)&_stack_pointer, //FIX stack pointer
-            (size_t *)&(Reset_IRQHandler),
-            (size_t *)&(NMI_IRQHandler),
-            (size_t *)&(HardFault_IRQHandler),
-            (size_t *)&(MemManage_IRQHandler),
-            (size_t *)&(BusFault_IRQHandler),
-            (size_t *)&(UsageFault_IRQHandler),
+            (FunctionPointer)&_stack_pointer, //FIX stack pointer
+            (Reset_IRQHandler),
+            (NMI_IRQHandler),
+            (HardFault_IRQHandler),
+            (MemManage_IRQHandler),
+            (BusFault_IRQHandler),
+            (UsageFault_IRQHandler),
             0,
             0,
             0,
             0,
-            (size_t *)&(SVCall_IRQHandler),
-            (size_t *)&(DebugMonitor_IRQHandler),
+            (SVCall_IRQHandler),
+            (DebugMonitor_IRQHandler),
             0,
-            (size_t *)&(PendSV_IRQHandler),
-            (size_t *)&(SysTick_IRQHandler),
+            (PendSV_IRQHandler),
+            (SysTick_IRQHandler),
 
-            (size_t *)&(WWDG_IRQHandler),
-            (size_t *)&(PVD_IRQHandler),
-            (size_t *)&(TAMPER_IRQHandler),
-            (size_t *)&(RTC_IRQHandler),
-            (size_t *)&(FLASH_IRQHandler),
-            (size_t *)&(RCC_IRQHandler),
-            (size_t *)&(EXTI0_IRQHandler),
-            (size_t *)&(EXTI1_IRQHandler),
-            (size_t *)&(EXTI2_IRQHandler),
-            (size_t *)&(EXTI3_IRQHandler),
-            (size_t *)&(EXTI4_IRQHandler),
-            (size_t *)&(DMA1_Channel1_IRQHandler),
-            (size_t *)&(DMA1_Channel2_IRQHandler),
-            (size_t *)&(DMA1_Channel3_IRQHandler),
-            (size_t *)&(DMA1_Channel4_IRQHandler),
-            (size_t *)&(DMA1_Channel5_IRQHandler),
-            (size_t *)&(DMA1_Channel6_IRQHandler),
-            (size_t *)&(DMA1_Channel7_IRQHandler),
-            (size_t *)&(ADC1_2_IRQHandler),
-            (size_t *)&(USB_HP_CAN1_TX_IRQHandler),
-            (size_t *)&(USB_LP_CAN1_RX0_IRQHandler),
-            (size_t *)&(CAN1_RX1_IRQHandler),
-            (size_t *)&(CAN1_SCE_IRQHandler),
-            (size_t *)&(EXTI9_5_IRQHandler),
-            (size_t *)&(TIM1_BRK_IRQHandler),
-            (size_t *)&(TIM1_UP_IRQHandler),
-            (size_t *)&(TIM1_TRG_COM_IRQHandler),
-            (size_t *)&(TIM1_CC_IRQHandler),
-            (size_t *)&(TIM2_IRQHandler),
-            (size_t *)&(TIM3_IRQHandler),
-            (size_t *)&(TIM4_IRQHandler),
-            (size_t *)&(I2C1_EV_IRQHandler),
-            (size_t *)&(I2C1_ER_IRQHandler),
-            (size_t *)&(I2C2_EV_IRQHandler),
-            (size_t *)&(I2C2_ER_IRQHandler),
-            (size_t *)&(SPI1_IRQHandler),
-            (size_t *)&(SPI2_IRQHandler),
-            (size_t *)&(USART1_IRQHandler),
-            (size_t *)&(USART2_IRQHandler),
-            (size_t *)&(USART3_IRQHandler),
-            (size_t *)&(EXTI15_10_IRQHandler),
-            (size_t *)&(RTCAlarm_IRQHandler),
-            (size_t *)&(USBWakeUp_IRQHandler)
+            (WWDG_IRQHandler),
+            (PVD_IRQHandler),
+            (TAMPER_IRQHandler),
+            (RTC_IRQHandler),
+            (FLASH_IRQHandler),
+            (RCC_IRQHandler),
+            (EXTI0_IRQHandler),
+            (EXTI1_IRQHandler),
+            (EXTI2_IRQHandler),
+            (EXTI3_IRQHandler),
+            (EXTI4_IRQHandler),
+            (DMA1_Channel1_IRQHandler),
+            (DMA1_Channel2_IRQHandler),
+            (DMA1_Channel3_IRQHandler),
+            (DMA1_Channel4_IRQHandler),
+            (DMA1_Channel5_IRQHandler),
+            (DMA1_Channel6_IRQHandler),
+            (DMA1_Channel7_IRQHandler),
+            (ADC1_2_IRQHandler),
+            (USB_HP_CAN1_TX_IRQHandler),
+            (USB_LP_CAN1_RX0_IRQHandler),
+            (CAN1_RX1_IRQHandler),
+            (CAN1_SCE_IRQHandler),
+            (EXTI9_5_IRQHandler),
+            (TIM1_BRK_IRQHandler),
+            (TIM1_UP_IRQHandler),
+            (TIM1_TRG_COM_IRQHandler),
+            (TIM1_CC_IRQHandler),
+            (TIM2_IRQHandler),
+            (TIM3_IRQHandler),
+            (TIM4_IRQHandler),
+            (I2C1_EV_IRQHandler),
+            (I2C1_ER_IRQHandler),
+            (I2C2_EV_IRQHandler),
+            (I2C2_ER_IRQHandler),
+            (SPI1_IRQHandler),
+            (SPI2_IRQHandler),
+            (USART1_IRQHandler),
+            (USART2_IRQHandler),
+            (USART3_IRQHandler),
+            (EXTI15_10_IRQHandler),
+            (RTCAlarm_IRQHandler),
+            (USBWakeUp_IRQHandler)
     };
 
-#ifdef __cplusplus
+#ifdef __cplusplus2
 }
 #endif
