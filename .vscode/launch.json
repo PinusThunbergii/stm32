@@ -12,7 +12,7 @@
             "request": "launch",
             "type": "cortex-debug",
             "servertype": "stutil",
-            ""
+            "svdFile" : "${workspaceRoot}/svd/STM32F103xx.svd"
         },
     ]
 

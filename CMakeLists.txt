@@ -21,7 +21,8 @@ set(
     MYSOURCES 
     src/vectors.c
     src/startup.c
-    src/main.cpp
+    src/main.c
+    src/clock.c
     #src/vectors.cpp
 )
 include_directories(third-party/CMSIS/CM3/DeviceSupport/ST/STM32F10x/ third-party/CMSIS/CM3/CoreSupport/)
