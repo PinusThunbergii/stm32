@@ -18,7 +18,7 @@
         {
             "label": "cmake rebuild",
             "type": "shell",
-            "command": "cd build/; cmake ../",
+            "command": "cd build/; trash * ; cmake ../; cmake --build ./",
             "group": {
                 "isDefault": true,
                 "kind": "build"

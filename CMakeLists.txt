@@ -14,16 +14,17 @@ set(CMAKE_OBJDUMP ${TOOLCHAIN_PREFIX}objdump)
 set(CMAKE_SIZE ${TOOLCHAIN_PREFIX}size)
 
 set(LINKER_SCRIPT "linker-script/stm32f103c8t6.ld")
-set(CMAKE_C_FLAGS "-mcpu=cortex-m3 -mthumb -nostdlib -nostartfiles -Wall -g")
+set(CMAKE_C_FLAGS "-mcpu=cortex-m3 -mthumb -Wall -g -nostdlib -nostartfiles -Wall -g  -fno-unwind-tables -fno-exceptions -fno-rtti") #-ffunction-sections -fno-unwind-tables  -fno-unwind-tables -fno-exceptions
 set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS}")
 set(CMAKE_EXE_LINKER_FLAGS "-T ${PROJECT_SOURCE_DIR}/${LINKER_SCRIPT}")
 set(
     MYSOURCES 
+    src/cxx_stub.c
     src/vectors.c
     src/startup.c
-    src/main.c
+    src/main.cpp
     src/clock.c
-    #src/vectors.cpp
+    src/test_class.cpp
 )
 include_directories(third-party/CMSIS/CM3/DeviceSupport/ST/STM32F10x/ third-party/CMSIS/CM3/CoreSupport/)
 #add_library(vectors src/vectors.c)

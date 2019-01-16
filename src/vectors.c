@@ -5,7 +5,7 @@
 #define vector_default_handler __attribute__((alias("DefaultHandler")))
 typedef void (* const FunctionPointer)(void);
 
-#ifdef __cplusplus2
+#ifdef __cplusplus
 extern "C"
 {
 #endif
@@ -75,7 +75,7 @@ extern "C"
     vector_weak vector_default_handler void RTCAlarm_IRQHandler(void);
     vector_weak vector_default_handler void USBWakeUp_IRQHandler(void);
 
-    __attribute__((section(".vectors"))) FunctionPointer vectors[] =
+    __attribute__((section(".isr_vectors"))) FunctionPointer vectors[] =
         {
             (FunctionPointer)&_stack_pointer, //FIX stack pointer
             (Reset_IRQHandler),
@@ -139,6 +139,6 @@ extern "C"
             (USBWakeUp_IRQHandler)
     };
 
-#ifdef __cplusplus2
+#ifdef __cplusplus
 }
 #endif

@@ -1,1 +1,1 @@
-[{"node":"RCC.APB2ENR","expanded":true,"format":0}]
+[{"node":"RCC","expanded":true,"format":0},{"node":"RCC.CFGR","expanded":true,"format":0},{"node":"RCC.CFGR.PLLMUL","format":3},{"node":"RCC.APB2ENR","expanded":true,"format":0},{"node":"TIM1","expanded":true,"format":0}]
