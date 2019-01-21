@@ -28,8 +28,8 @@ extern uint32_t __stack_size[];
 extern void main();
 void zero_bss();
 void copy_data();
-
-
+void call_constructors();
+void call_destructors();
 
 void zero_bss()
 {

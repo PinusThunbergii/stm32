@@ -5,10 +5,24 @@
     "version": "0.2.0",
         
     "configurations": [
-       
+        {
+            "name": "GDB",
+            "type": "gdb",
+            "request": "launch",
+            "cwd": "${workspaceRoot}",
+            "target": "${workspaceRoot}/build/barebone", 
+            "gdbpath" : "arm-none-eabi-gdb",
+            "autorun": [
+                "target extended-remote /dev/ttyACM0",
+                "monitor swdp_scan",
+                "attach 1",
+                "load ./build/barebone",
+                ]
+        },
         {
             "cwd": "${workspaceRoot}",
             "executable": "./build/barebone",
+            "armToolchainPath": "/opt/gcc-arm-none-eabi/bin/",
             "name": "Debug Microcontroller BMP",
             "request": "launch",
             "type": "cortex-debug",
@@ -18,6 +32,7 @@
             "preLaunchTask": "cmake build"
 
         },
+
         {
             "cwd": "${workspaceRoot}",
             "executable": "./build/barebone",
@@ -28,8 +43,6 @@
             "svdFile" : "${workspaceRoot}/svd/STM32F103xx.svd",
             "preLaunchTask": "cmake build"
         }
-        
-        
     ]
 
 }

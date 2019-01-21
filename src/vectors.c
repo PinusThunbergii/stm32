@@ -1,6 +1,6 @@
 //#include <cstdio>
 #include <stdint.h>
-
+#include "utils.h"
 #define vector_weak __attribute__((weak))
 #define vector_default_handler __attribute__((alias("DefaultHandler")))
 typedef void (* const FunctionPointer)(void);
@@ -17,6 +17,7 @@ extern "C"
         while (1)
         {
             //simple hook
+            soft_break_point();
         }
     }
     __attribute__ ((noreturn))
